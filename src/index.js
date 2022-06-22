@@ -30,31 +30,21 @@ module.exports = function toReadable (number) {
       90: "ninety"
   };
 
-  let strRes = "";
-  let num =0;
-  if (number == 0) {return "zero"};
+  let arrRes = [];
+
+  if (number == 0) return "zero";
   if (number >= 100){
-      num = Math.floor(number / 100);
-      strRes += `${strArr[Math.floor(number / 100)]} hundred`;
-      num = number - Math.floor(number / 100)*100;
-      if (num == 0){return strRes;};
-  }else if(number < 100){
-    num = number;
-  };
+      arrRes.push(`${strArr[Math.floor(number / 100)]} hundred`);
+  }
+
+  let num = number % 100;
+  if( !num ) return arrRes.join(' ');
+
   if (strArr[num]){
-    if (number > 100){
-      strRes += ` ${strArr[num]}`;
-    }else{
-      strRes += `${strArr[num]}`
-    };
-  }else{
-    if (number > 100){
-      strRes += ` ${strArr[Math.floor(num / 10)*10]} ${strArr[num % 10]}`;
-    }else{
-      strRes += `${strArr[Math.floor(num / 10)*10]} ${strArr[num % 10]}`;
-    };
-  };
-  return strRes;
+    arrRes.push(`${strArr[num]}`);
+    return arrRes.join(' ');
+  }
+
+  arrRes.push(`${strArr[Math.floor(num / 10)*10]} ${strArr[num % 10]}`);
+  return arrRes.join(' ');
 };
-
-
