@@ -30,6 +30,7 @@ module.exports = function toReadable (number) {
       90: "ninety"
   };
 
+  const getResult =(arr) => arr.join(" ");
   let arrRes = [];
 
   if (number == 0) return "zero";
@@ -38,13 +39,14 @@ module.exports = function toReadable (number) {
   }
 
   let num = number % 100;
-  if( !num ) return arrRes.join(' ');
+  if( !num ) return getResult(arrRes);
 
   if (strArr[num]){
     arrRes.push(`${strArr[num]}`);
-    return arrRes.join(' ');
+    return getResult(arrRes);
   }
 
   arrRes.push(`${strArr[Math.floor(num / 10)*10]} ${strArr[num % 10]}`);
-  return arrRes.join(' ');
+  return getResult(arrRes);
 };
+
